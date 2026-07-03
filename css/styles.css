@@ -142,17 +142,31 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.1; lett
 .section-title { font-size: clamp(1.9rem, 4vw, 3rem); margin-bottom: 20px; max-width: 780px; }
 .section-lead { font-size: 1.12rem; color: var(--slate); max-width: 620px; margin-bottom: 56px; }
 
-/* ---------- Cards (audience) ---------- */
-.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.card {
-  background: linear-gradient(160deg, var(--panel-2), var(--panel));
-  border: 1px solid var(--line-soft); border-radius: var(--radius);
-  padding: 38px 30px; transition: all 0.45s var(--ease);
+/* ---------- Line-art icons (bespoke set, no emoji) ---------- */
+.icn { width: 22px; height: 22px; display: block; fill: none; stroke: var(--gold); stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- Who We Design For (editorial, asymmetric) ---------- */
+.audience-inner { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 64px; align-items: start; }
+.audience-intro { position: sticky; top: 104px; }
+.audience-intro .section-lead { margin-bottom: 0; }
+.audience-list { list-style: none; display: flex; flex-direction: column; }
+.audience-item {
+  display: grid; grid-template-columns: auto auto 1fr; grid-template-areas: "num icon copy";
+  gap: 24px; align-items: center;
+  padding: 30px 4px; border-top: 1px solid var(--line-soft); transition: padding-left 0.4s var(--ease);
 }
-.card:hover { transform: translateY(-6px); border-color: var(--line); box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
-.card-icon { font-size: 2rem; margin-bottom: 18px; }
-.card h3 { font-size: 1.35rem; margin-bottom: 12px; color: var(--cream); }
-.card p { color: var(--slate); font-size: 0.98rem; }
+.audience-item:last-child { border-bottom: 1px solid var(--line-soft); }
+.audience-item:hover { padding-left: 14px; }
+.audience-num { grid-area: num; font-family: var(--serif); font-size: 1.6rem; font-weight: 500; color: var(--slate-dim); line-height: 1; }
+.audience-icon {
+  grid-area: icon; display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px;
+  border: 1px solid var(--line); border-radius: 13px; background: rgba(201, 169, 106, 0.06);
+  transition: all 0.4s var(--ease);
+}
+.audience-item:hover .audience-icon { background: rgba(201, 169, 106, 0.14); border-color: var(--gold); }
+.audience-copy { grid-area: copy; }
+.audience-copy h3 { font-size: 1.32rem; margin-bottom: 8px; color: var(--cream); }
+.audience-copy p { color: var(--slate); font-size: 0.98rem; }
 
 /* ---------- Services ---------- */
 .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); border-radius: var(--radius); overflow: hidden; }
@@ -233,8 +247,10 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.1; lett
 
 /* ---------- Responsive ---------- */
 @media (max-width: 940px) {
-  .cards-grid, .services-grid, .process-grid { grid-template-columns: 1fr 1fr; }
+  .services-grid, .process-grid { grid-template-columns: 1fr 1fr; }
   .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+  .audience-inner { grid-template-columns: 1fr; gap: 32px; }
+  .audience-intro { position: static; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 720px) {
@@ -242,11 +258,12 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.1; lett
   .nav-toggle { display: flex; }
   .mobile-menu { display: flex; }
   .mobile-menu[hidden] { display: none; }
-  .cards-grid, .services-grid, .process-grid { grid-template-columns: 1fr; }
+  .services-grid, .process-grid { grid-template-columns: 1fr; }
   .section { padding: 80px 0; }
   .hero { padding: 150px 0 90px; }
   .footer-inner { grid-template-columns: 1fr; }
   .about-panel { max-width: 420px; }
+  .audience-item { grid-template-columns: auto 1fr; grid-template-areas: "num icon" "copy copy"; gap: 14px 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
