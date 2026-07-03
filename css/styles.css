@@ -198,11 +198,35 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.1; lett
 /* ---------- Pricing band ---------- */
 .pricing-band { position: relative; padding: 100px 0; text-align: center; overflow: hidden; background: linear-gradient(160deg, var(--midnight), var(--black)); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
 .pricing-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(37,99,235,0.25), transparent 70%); filter: blur(30px); pointer-events: none; }
-.pricing-inner { position: relative; max-width: 720px; margin: 0 auto; }
+.pricing-inner { position: relative; max-width: 920px; margin: 0 auto; }
 .pricing-title { font-size: clamp(1.9rem, 4vw, 2.9rem); margin: 14px 0 18px; }
-.pricing-lead { color: var(--slate); font-size: 1.1rem; margin-bottom: 36px; }
+.pricing-lead { color: var(--slate); font-size: 1.1rem; margin-bottom: 44px; max-width: 640px; margin-left: auto; margin-right: auto; }
 .pricing-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
 .pricing-note { font-size: 0.86rem; color: var(--slate-dim); }
+
+/* Plan option cards (no prices — options only) */
+.plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 44px; text-align: left; }
+.plan {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line-soft); border-radius: var(--radius);
+  padding: 34px 32px; transition: transform 0.45s var(--ease), border-color 0.45s var(--ease);
+}
+.plan:hover { transform: translateY(-6px); border-color: var(--line); }
+.plan-featured { border-color: var(--line); box-shadow: 0 22px 55px rgba(0,0,0,0.45); }
+.plan-featured::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(120deg, var(--gold-light), var(--gold));
+}
+.plan-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+.plan-name { font-size: 1.55rem; color: var(--cream); margin: 10px 0 8px; }
+.plan-summary { color: var(--slate); font-size: 0.98rem; margin-bottom: 22px; }
+.plan-list { list-style: none; display: grid; gap: 13px; }
+.plan-list li {
+  position: relative; padding-left: 30px; color: var(--cream); font-size: 0.96rem; line-height: 1.5;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9A96A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat left 4px;
+  background-size: 17px 17px;
+}
 
 /* ---------- Contact ---------- */
 .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
@@ -264,6 +288,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.1; lett
   .footer-inner { grid-template-columns: 1fr; }
   .about-panel { max-width: 420px; }
   .audience-item { grid-template-columns: auto 1fr; grid-template-areas: "num icon" "copy copy"; gap: 14px 18px; }
+  .plans { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
