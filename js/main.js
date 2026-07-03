@@ -7,7 +7,7 @@
   // CAL_LINK below to your booking path e.g. 'luke-richard/intro-call'.
   // While it stays as the placeholder, the Book a Call buttons simply scroll to
   // the contact form (their href="#contact" fallback) — nothing breaks.
-  var CAL_LINK = 'YOUR_CAL_LINK';        // <-- change this one line to go live
+  var CAL_LINK = 'luke-stapleton-gffimi';        // Cal.com public booking page
   var CAL_NAMESPACE = 'intro-call';
   if (CAL_LINK && CAL_LINK.indexOf('YOUR_CAL_LINK') === -1) {
     // Official Cal.com embed loader
