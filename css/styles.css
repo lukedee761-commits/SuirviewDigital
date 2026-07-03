@@ -20,7 +20,7 @@
 
   --cream: #F7F5F1;
   --slate: #8B93A7;
-  --slate-dim: #5B6274;
+  --slate-dim: #828A9E; /* WCAG AA (>=4.5:1) on all dark surfaces */
   --line: rgba(201, 169, 106, 0.16);
   --line-soft: rgba(255, 255, 255, 0.07);
 
