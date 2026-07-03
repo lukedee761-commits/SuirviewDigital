@@ -133,14 +133,17 @@
 
       if (!name || !email || !message) {
         setStatus('Please fill in your name, email and message.', 'err');
+        (!name ? form.name : !email ? form.email : form.message).focus();
         return;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         setStatus('Please enter a valid email address.', 'err');
+        form.email.focus();
         return;
       }
       if (form.consent && !form.consent.checked) {
         setStatus('Please tick the box to confirm you’re happy to be contacted.', 'err');
+        form.consent.focus();
         return;
       }
 
