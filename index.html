@@ -240,7 +240,8 @@
           </ul>
         </div>
 
-        <form class="contact-form reveal" id="contactForm" novalidate>
+        <!-- Formspree: replace YOUR_FORM_ID in the action below with your real form ID from formspree.io -->
+        <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
           <div class="field">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" autocomplete="name" required />
@@ -257,6 +258,9 @@
             <label for="message">How can I help?</label>
             <textarea id="message" name="message" rows="4" required></textarea>
           </div>
+          <!-- Formspree subject line + honeypot spam trap (hidden from real users) -->
+          <input type="hidden" name="_subject" value="New enquiry from SuirViewDigital.ie" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
           <button type="submit" class="btn btn-gold btn-block">Send Enquiry</button>
           <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>

@@ -67,29 +67,63 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
-  // Contact form (front-end only for now — wire to Formspree to send)
+  // Contact form — submits to Formspree (form action) via fetch.
   var form = document.getElementById('contactForm');
   var status = document.getElementById('formStatus');
   if (form) {
+    var submitBtn = form.querySelector('button[type="submit"]');
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var name = form.name.value.trim();
       var email = form.email.value.trim();
       var message = form.message.value.trim();
+
       if (!name || !email || !message) {
-        status.textContent = 'Please fill in your name, email and message.';
-        status.className = 'form-status err';
+        setStatus('Please fill in your name, email and message.', 'err');
         return;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        status.textContent = 'Please enter a valid email address.';
-        status.className = 'form-status err';
+        setStatus('Please enter a valid email address.', 'err');
         return;
       }
-      // TODO: connect to Formspree endpoint to actually deliver the enquiry.
-      status.textContent = 'Thanks, ' + name + " — I'll be in touch shortly.";
-      status.className = 'form-status ok';
-      form.reset();
+
+      // Guard: if the Formspree endpoint hasn't been set yet, don't pretend it sent.
+      var action = form.getAttribute('action') || '';
+      if (action.indexOf('YOUR_FORM_ID') !== -1 || action.indexOf('formspree.io/f/') === -1) {
+        setStatus('Enquiries aren’t connected yet — please call 085 153 8421 or email Lukedigital489@gmail.com.', 'err');
+        return;
+      }
+
+      setStatus('Sending…', 'ok');
+      submitBtn.disabled = true;
+
+      fetch(action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (res) {
+        if (res.ok) {
+          setStatus('Thanks, ' + name + ' — I’ll be in touch shortly.', 'ok');
+          form.reset();
+        } else {
+          return res.json().then(function (data) {
+            var msg = (data && data.errors && data.errors.length)
+              ? data.errors.map(function (er) { return er.message; }).join(', ')
+              : 'Something went wrong. Please call 085 153 8421 or email Lukedigital489@gmail.com.';
+            setStatus(msg, 'err');
+          });
+        }
+      }).catch(function () {
+        setStatus('Couldn’t send just now — please call 085 153 8421 or email Lukedigital489@gmail.com.', 'err');
+      }).then(function () {
+        submitBtn.disabled = false;
+      });
     });
+
+    function setStatus(text, type) {
+      status.textContent = text;
+      status.className = 'form-status ' + type;
+    }
   }
 })();
