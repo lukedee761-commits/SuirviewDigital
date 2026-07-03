@@ -58,6 +58,21 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.1; lett
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
+/* Signature: gold underline draws under section headings when they scroll in */
+.section-title::after, .pricing-title::after {
+  content: ''; display: block; height: 2px; width: 0; margin-top: 20px; border-radius: 2px;
+  background: linear-gradient(120deg, var(--gold-light), var(--gold));
+  transition: width 0.9s var(--ease);
+}
+.pricing-title::after { margin-left: auto; margin-right: auto; }
+.section-title.drawn::after, .pricing-title.drawn::after { width: 64px; }
+
+/* Accessible focus states (WCAG AA) */
+a:focus-visible, button:focus-visible, .btn:focus-visible,
+input:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px;
+}
+
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -182,7 +197,8 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.1; lett
 .about-text strong { color: var(--cream); }
 .about-list { list-style: none; margin-top: 26px; display: grid; gap: 14px; }
 .about-list li { display: flex; align-items: center; gap: 12px; color: var(--cream); font-size: 1rem; }
-.about-list span { color: var(--gold); font-weight: 700; }
+.about-list .tick { display: inline-flex; flex-shrink: 0; }
+.about-list .tick .icn { width: 19px; height: 19px; }
 .about-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line-soft); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .stat { background: linear-gradient(160deg, var(--midnight-2), var(--panel)); padding: 34px 26px; text-align: center; }
 .stat strong { display: block; font-family: var(--serif); font-size: 2.1rem; color: var(--gold-light); margin-bottom: 6px; }
@@ -249,6 +265,10 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.1; lett
 .form-status { margin-top: 14px; font-size: 0.9rem; text-align: center; min-height: 20px; }
 .form-status.ok { color: var(--gold-light); }
 .form-status.err { color: #f08a8a; }
+/* GDPR consent */
+.consent { display: flex; gap: 11px; align-items: flex-start; margin-bottom: 20px; cursor: pointer; }
+.consent input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--gold); cursor: pointer; }
+.consent span { font-size: 0.82rem; line-height: 1.5; color: var(--slate); }
 
 /* ---------- Footer ---------- */
 .site-footer { background: #08090d; border-top: 1px solid var(--line-soft); padding: 64px 0 28px; }

@@ -76,6 +76,18 @@
     el.style.transitionDelay = (Math.min(i % 3, 2) * 0.08) + 's'; // gentle stagger
   });
 
+  // Signature: gold underline that draws under section headings on scroll-in.
+  var headings = [].slice.call(document.querySelectorAll('.section-title, .pricing-title'));
+  function drawHeadings() {
+    var trigger = window.innerHeight * 0.9;
+    for (var i = headings.length - 1; i >= 0; i--) {
+      if (headings[i].getBoundingClientRect().top < trigger) {
+        headings[i].classList.add('drawn');
+        headings.splice(i, 1);
+      }
+    }
+  }
+
   var ticking = false;
   function checkReveals() {
     ticking = false;
@@ -87,6 +99,7 @@
         reveals.splice(i, 1); // stop tracking once revealed
       }
     }
+    drawHeadings();
   }
   function onRevealScroll() {
     if (!ticking) { ticking = true; requestAnimationFrame(checkReveals); }
@@ -99,6 +112,7 @@
   // Absolute safety net: never leave content invisible.
   setTimeout(function () {
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+    document.querySelectorAll('.section-title, .pricing-title').forEach(function (el) { el.classList.add('drawn'); });
   }, 2500);
 
   // Footer year
@@ -123,6 +137,10 @@
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         setStatus('Please enter a valid email address.', 'err');
+        return;
+      }
+      if (form.consent && !form.consent.checked) {
+        setStatus('Please tick the box to confirm you’re happy to be contacted.', 'err');
         return;
       }
 
