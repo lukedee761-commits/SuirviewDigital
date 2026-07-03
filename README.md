@@ -21,13 +21,9 @@ serve.ps1             Local preview server (no Node/Python needed)
 ```
 
 ## Sections (in order)
-Hero → Who We Design For → Services → Selected Work → About → Process → Pricing (call-only) → Contact → Footer.
+Hero → Who We Design For → Services → About → Process → Pricing (call-only) → Contact → Footer.
 
-## Selected Work showcased
-Three different client industries, each linking to the live demo:
-- **Dentist** — Andrew Kelly, Nenagh → https://andrew-nenagh-dentist.vercel.app
-- **GP** — Kyle Court Clinic, Tipperary Town → https://kylecourt-clinic.vercel.app
-- **Chiropody** — Paula's Foot Clinic, Tralee → https://paulas-footclinic.vercel.app
+> **Note:** A "Selected Work" portfolio section was intentionally removed — the demo sites are unapproved and we don't yet have permission to display them. Add a portfolio later, once clients have signed off.
 
 ## Preview locally
 ```
@@ -42,7 +38,7 @@ Push to a GitHub repo, import to Vercel (auto-deploys on every push), then point
 - [ ] **Wire up the contact form** — currently front-end only. Create a free Formspree account and set the endpoint (see the `TODO` in `js/main.js`).
 - [ ] **Testimonials** — add real client quotes once available.
 - [ ] **Confirm final copy** — headline/tagline are a strong starting point; tweak to taste.
-- [ ] Optional: real screenshots of the demo sites in the Selected Work cards (currently elegant styled mockups + live links).
+- [ ] **Portfolio (later)** — add a "Selected Work" section once clients approve showing their sites.
 
 ## Pricing note
 No prices shown on the site by design — "price upon call". The two plans (€50 + €200/mo, or €1,799 one-time with 24 months care) are discussed on the phone.
