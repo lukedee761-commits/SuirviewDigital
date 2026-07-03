@@ -2,6 +2,44 @@
 (function () {
   'use strict';
 
+  // ===== Cal.com "Book a Call" scheduler =====================================
+  // To activate: create a Cal.com event type, connect Google Calendar, then set
+  // CAL_LINK below to your booking path e.g. 'luke-richard/intro-call'.
+  // While it stays as the placeholder, the Book a Call buttons simply scroll to
+  // the contact form (their href="#contact" fallback) — nothing breaks.
+  var CAL_LINK = 'YOUR_CAL_LINK';        // <-- change this one line to go live
+  var CAL_NAMESPACE = 'intro-call';
+  if (CAL_LINK && CAL_LINK.indexOf('YOUR_CAL_LINK') === -1) {
+    // Official Cal.com embed loader
+    (function (C, A, L) {
+      var p = function (a, ar) { a.q.push(ar); };
+      var d = C.document;
+      C.Cal = C.Cal || function () {
+        var cal = C.Cal, ar = arguments;
+        if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; }
+        if (ar[0] === L) {
+          var api = function () { p(api, arguments); };
+          var namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === 'string') { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ['initNamespace', namespace]); }
+          else { p(cal, ar); }
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+    Cal('init', CAL_NAMESPACE, { origin: 'https://cal.com' });
+    Cal.ns[CAL_NAMESPACE]('ui', { hideEventTypeDetails: false, layout: 'month_view' });
+
+    // Point the Book a Call buttons at the popup scheduler
+    document.querySelectorAll('.book-call').forEach(function (btn) {
+      btn.setAttribute('data-cal-namespace', CAL_NAMESPACE);
+      btn.setAttribute('data-cal-link', CAL_LINK);
+      btn.setAttribute('data-cal-config', '{"layout":"month_view"}');
+    });
+  }
+
   // Header shadow on scroll
   var header = document.querySelector('.site-header');
   function onScroll() {
