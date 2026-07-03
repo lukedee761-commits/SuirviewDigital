@@ -310,6 +310,12 @@ input:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   .audience-item { grid-template-columns: auto 1fr; grid-template-areas: "num icon" "copy copy"; gap: 14px 18px; }
   .plans { grid-template-columns: 1fr; }
 }
+@media (max-width: 480px) {
+  /* Prevent long CTA labels overflowing narrow phones */
+  .btn { white-space: normal; text-align: center; }
+  .hero-cta, .pricing-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn, .pricing-cta .btn { width: 100%; }
+}
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
